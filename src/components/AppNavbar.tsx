@@ -1,30 +1,43 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import clsx from "clsx";
+import { ThemeContext } from "../utils/themeContext";
 
 export function AppNavbar() {
 
     const [toggleMenu, setToggleMenu] = useState(true);
+    const { fontFamily, setFontFamily } = useContext(ThemeContext);
+    console.log(fontFamily)
 
     return (
 
-        <header className="flex items-center justify-between mx-auto my-4">
+        <header className={`${fontFamily} grid grid-cols-3 md:flex md:items-center md:justify-between mx-auto my-4`}>
 
             <div className="ml-4">
                 <h2>React Hooks</h2>
             </div>
 
             <button
+                className="md:order-4 md:mr-4 justify-self-end"
+                onClick={() => {
+                    setFontFamily((prev) => prev === "font-cursive" ? "font-serif" : "font-cursive")
+                }}
+            >
+                Cursive
+            </button>
+
+            <button
                 className="md:hidden mr-4"
                 onClick={() => {
-                    console.log({toggleMenu})
-                    setToggleMenu(!toggleMenu)}
+                    console.log({ toggleMenu })
+                    setToggleMenu(!toggleMenu)
+                }
                 }
             >
                 Menu
             </button>
 
-            <div className={clsx("w-full md:w-auto vissible md:block", {"hidden": toggleMenu})}>
+            <div className={clsx("w-full md:w-auto vissible md:block ml-3 md:grow md:flex md:justify-end", { "hidden": toggleMenu })}>
                 <ul className="md:flex">
 
                     <li className="mr-2">
