@@ -3,9 +3,11 @@ import { Outlet } from "react-router-dom";
 
 export default function Layout() {
     return (
-        <div className="max-w-screen-2xl my-0 mx-auto">
+        <div className="sm:max-w-screen-sm lg:max-w-screen-2xl my-0 mx-auto">
             <AppNavbar />
-            <Outlet />
+            <main>
+                <Outlet />
+            </main>
         </div>
     )
 }
