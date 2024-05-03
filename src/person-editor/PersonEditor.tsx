@@ -1,10 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { LabeledInput } from '../components'
 import { initialPerson } from '../utils/InitialPerson';
+import { Person } from '../types/person';
+import localforage from 'localforage';
 
+
+function savePerson(person: Person | null) : void {
+    console.log("Saving person", person)
+    localforage.setItem("person", person)
+}
 
 export function PersonEditor() {
-    const [person, setPerson] = useState(() => initialPerson);
+    const [person, setPerson] = useState<Person | null>(null);
+
+    useEffect(() => {
+        const getPerson = async () => {
+            const person = await localforage.getItem<Person>("person");
+            setPerson(person ?? initialPerson)
+        }
+        getPerson()
+    }, [])
+
+    useEffect(() => {
+        savePerson(person)
+    },[person])
+
+    if (!person) return <div>Loading...</div>
 
     return (
         <section className="max-w-full">
@@ -15,7 +36,7 @@ export function PersonEditor() {
                     label="First Name"
                     value={person.firstname}
                     onChange={(e) => {
-                        setPerson((state) => ({...state,firstname: e.target.value}));
+                        setPerson((person) => ({...person!,firstname: e.target.value}));
                     }}
                 />
 
@@ -23,7 +44,7 @@ export function PersonEditor() {
                     label="Surname"
                     value={person.surname}
                     onChange={(e) => {
-                        setPerson((state) => ({...state,surname: e.target.value}));
+                        setPerson((person) => ({...person!,surname: e.target.value}));
                     }}
                 />
 
@@ -31,7 +52,7 @@ export function PersonEditor() {
                     label="Email"
                     value={person.email}
                     onChange={(e) => {
-                        setPerson((state) => ({...state,email: e.target.value}));
+                        setPerson((person) => ({...person!,email: e.target.value}));
                     }}
                 />
 
@@ -39,7 +60,7 @@ export function PersonEditor() {
                     label="Address"
                     value={person.address}
                     onChange={(e) => {
-                        setPerson((state) => ({...state,address: e.target.value}));
+                        setPerson((person) => ({...person!,address: e.target.value}));
                     }}
                 />
 
@@ -47,7 +68,7 @@ export function PersonEditor() {
                     label="Phone"
                     value={person.phone}
                     onChange={(e) => {
-                        setPerson((state) => ({...state,phone: e.target.value}));
+                        setPerson((person) => ({...person!,phone: e.target.value}));
                     }}
                 />
 
@@ -62,15 +83,17 @@ export function PersonEditor() {
 
             <hr />
 
-            <p className="m-2">
+            <div className="m-2">
 
-                <pre
+                {/* <pre
                     className="overflow-hidden"
                 >
                     {JSON.stringify(person, null, 2)}
-                </pre>
-
-            </p>
+                </pre> */}
+                {Object.entries(person).map(([key,val],index) => {
+                    return <p key={index}>{key}: {val}</p>
+                })}
+            </div>
 
         </section>
     )
