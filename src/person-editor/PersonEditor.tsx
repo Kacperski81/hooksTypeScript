@@ -1,12 +1,9 @@
-import { useContext } from 'react';
 import { LabeledInput } from '../components';
 import { initialPerson } from '../utils/InitialPerson';
-import { ThemeContext } from '../utils/themeContext';
 import { usePerson } from './usePerson';
 
 export function PersonEditor() {
     const [person, setPerson] = usePerson(initialPerson);
-    const { fontFamily } = useContext(ThemeContext);
 
     if (!person) return <div>Loading...</div>
 
@@ -16,7 +13,6 @@ export function PersonEditor() {
             <form>
 
                 <LabeledInput
-                    fontFamily={fontFamily}
                     label="First Name"
                     value={person.firstname}
                     onChange={(e) => {
@@ -25,7 +21,6 @@ export function PersonEditor() {
                 />
 
                 <LabeledInput
-                    fontFamily={fontFamily}
                     label="Surname"
                     value={person.surname}
                     onChange={(e) => {
@@ -34,7 +29,6 @@ export function PersonEditor() {
                 />
 
                 <LabeledInput
-                    fontFamily={fontFamily}
                     label="Email"
                     value={person.email}
                     onChange={(e) => {
@@ -43,7 +37,6 @@ export function PersonEditor() {
                 />
 
                 <LabeledInput
-                    fontFamily={fontFamily}
                     label="Address"
                     value={person.address}
                     onChange={(e) => {
@@ -52,7 +45,6 @@ export function PersonEditor() {
                 />
 
                 <LabeledInput
-                    fontFamily={fontFamily}
                     label="Phone"
                     value={person.phone}
                     onChange={(e) => {

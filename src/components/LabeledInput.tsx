@@ -2,12 +2,11 @@ interface LabeledInputProps {
     label: string;
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    fontFamily: string;
 }
 
-export function LabeledInput({label, value, onChange, fontFamily} : LabeledInputProps) {
+export const LabeledInput = ({label, value, onChange} : LabeledInputProps) => {
     return (
-        <div className={`flex flex-col m-2 ${fontFamily}`}>
+        <div className={`flex flex-col m-2`}>
             <label>{label}</label>
             <input 
                 type="text"
