@@ -1,31 +1,12 @@
-import { useState, useEffect, useContext } from 'react';
-import { LabeledInput } from '../components'
+import { useContext } from 'react';
+import { LabeledInput } from '../components';
 import { initialPerson } from '../utils/InitialPerson';
-import { Person } from '../types/person';
-import localforage from 'localforage';
 import { ThemeContext } from '../utils/themeContext';
-
-
-function savePerson(person: Person | null): void {
-    console.log("Saving person", person)
-    localforage.setItem("person", person)
-}
+import { usePerson } from './usePerson';
 
 export function PersonEditor() {
-    const [person, setPerson] = useState<Person | null>(null);
+    const [person, setPerson] = usePerson(initialPerson);
     const { fontFamily } = useContext(ThemeContext);
-
-    useEffect(() => {
-        const getPerson = async () => {
-            const person = await localforage.getItem<Person>("person");
-            setPerson(person ?? initialPerson)
-        }
-        getPerson()
-    }, [])
-
-    useEffect(() => {
-        savePerson(person)
-    }, [person])
 
     if (!person) return <div>Loading...</div>
 
