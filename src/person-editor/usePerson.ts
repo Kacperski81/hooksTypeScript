@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import localforage from 'localforage';
 
 import type { Person } from '../types/person';
+import { useDebounce } from '../hooks/useDebounce';
 // import { sleep } from '../utils/sleep';
 
 function savePerson(person: Person | null) {
@@ -21,9 +22,20 @@ export function usePerson(initialPerson: Person) {
         getPerson();
     },[initialPerson])
 
+    const [,setNow] = useState(new Date());
+
     useEffect(() => {
+        const handle = setInterval(() => {
+            setNow(new Date())
+        },500)
+        return () => clearInterval(handle);
+    },[])
+
+    const saveFn = useCallback(() => {
         savePerson(person);
     },[person])
+
+    useDebounce(saveFn, 1000);
 
     return [person, setPerson] as const;
 }
