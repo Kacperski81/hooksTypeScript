@@ -3,6 +3,7 @@ import localforage from 'localforage';
 
 import type { Person } from '../types/person';
 import { useDebounce } from '../hooks/useDebounce';
+import { useWillUnmounts } from '../hooks/useWillUnmounts';
 // import { sleep } from '../utils/sleep';
 
 function savePerson(person: Person | null) {
@@ -36,6 +37,7 @@ export function usePerson(initialPerson: Person) {
     },[person])
 
     useDebounce(saveFn, 1000);
+    useWillUnmounts(saveFn);
 
     return [person, setPerson] as const;
 }
