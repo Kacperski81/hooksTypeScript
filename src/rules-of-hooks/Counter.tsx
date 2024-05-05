@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useLayoutEffect} from "react"; 
+import { ColorPicker } from "../components/ColorPicker";
 
 export default function Counter() {
     const [counter, setCounter] = useState(0);
@@ -33,6 +34,8 @@ export default function Counter() {
             >
                 Increment
             </button>
+            <hr className="mt-3 mr-3"/>
+            <ColorPicker />
 
         </div>
     )
