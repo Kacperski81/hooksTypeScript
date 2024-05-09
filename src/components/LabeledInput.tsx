@@ -1,6 +1,6 @@
 interface LabeledInputProps {
     label: string;
-    value: string;
+    value: string | number;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

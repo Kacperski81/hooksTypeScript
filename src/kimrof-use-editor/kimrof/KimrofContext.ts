@@ -1,7 +1,13 @@
 import { createContext } from 'react'
-// import { KimrofProperty } from './Types'
+import { KimrofObject } from './Types'
 
-export const KimrofContext = createContext({})
+interface kimrofContext {
+    values: KimrofObject
+}
+
+export const KimrofContext = createContext<kimrofContext>({
+    values: {}
+})
 
 
 

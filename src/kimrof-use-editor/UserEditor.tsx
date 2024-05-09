@@ -1,16 +1,16 @@
-import { LabeledInput } from "../components"
-import { useContext } from "react"
-import { KimrofContext } from "./kimrof/KimrofContext"
-import { Person } from "../types/person"
+
+import { KimrofLabeledField } from "./kimrof/KimrofLabeledField"
 
 export function UserEditor() {
-    const person: Person = useContext(KimrofContext)
 
-    console.log(person.value.firstname)
     return (
         <div>
             <h4>Kimrof User Editor</h4>
-            <LabeledInput label="First Name" value={person.value.firstname} onChange={() => console.log('ok')}/>
+            <KimrofLabeledField name="firstname" label="First Name" />
+            <KimrofLabeledField name="surname" label="Surname Name" />
+            <KimrofLabeledField name="email" label="Email" />
+            <KimrofLabeledField name="address" label="Address" />
+            <KimrofLabeledField name="phone" label="Phone" />
         </div>
     )
 }
