@@ -3,20 +3,33 @@ import { initialPerson } from '../utils/InitialPerson';
 import { usePerson } from './usePerson';
 
 export function PersonEditor() {
-    const [person, setPerson] = usePerson(initialPerson);
-
+    const [person, setProperty, setProperties, { isDirty, isValid }] = usePerson(initialPerson);
     if (!person) return <div>Loading...</div>
 
     return (
         <section className="max-w-full">
 
-            <form>
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                alert("<pre>" + JSON.stringify(person, null, 2) + "</pre>");
+                console.log('ok')}}
+            >
 
                 <LabeledInput
                     label="First Name"
                     value={person.firstname}
                     onChange={(e) => {
-                        setPerson((person) => ({ ...person!, firstname: e.target.value }));
+                        // setPerson((person) => ({ ...person!, firstname: e.target.value }));
+                        setProperty("firstname", e.target.value)
+
+                        if(e.target.value === "Ford") {
+                            setProperties({
+                                surname: "Prefect",
+                                address: "Outer Space",
+                                email: "",
+                                phone: "",
+                            })
+                        }
                     }}
                 />
 
@@ -24,7 +37,8 @@ export function PersonEditor() {
                     label="Surname"
                     value={person.surname}
                     onChange={(e) => {
-                        setPerson((person) => ({ ...person!, surname: e.target.value }));
+                        // setPerson((person) => ({ ...person!, surname: e.target.value }));
+                        setProperty("surname", e.target.value)
                     }}
                 />
 
@@ -32,7 +46,8 @@ export function PersonEditor() {
                     label="Email"
                     value={person.email}
                     onChange={(e) => {
-                        setPerson((person) => ({ ...person!, email: e.target.value }));
+                        // setPerson((person) => ({ ...person!, email: e.target.value }));
+                        setProperty("email", e.target.value)
                     }}
                 />
 
@@ -40,7 +55,8 @@ export function PersonEditor() {
                     label="Address"
                     value={person.address}
                     onChange={(e) => {
-                        setPerson((person) => ({ ...person!, address: e.target.value }));
+                        // setPerson((person) => ({ ...person!, address: e.target.value }));
+                        setProperty("address", e.target.value)
                     }}
                 />
 
@@ -48,13 +64,15 @@ export function PersonEditor() {
                     label="Phone"
                     value={person.phone}
                     onChange={(e) => {
-                        setPerson((person) => ({ ...person!, phone: e.target.value }));
+                        // setPerson((person) => ({ ...person!, phone: e.target.value }));
+                        setProperty("phone", e.target.value)    
                     }}
                 />
 
                 <button
                     type="submit"
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2"
+                    disabled={!isDirty || !isValid}
                 >
                     Submit
                 </button>
