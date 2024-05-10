@@ -6,7 +6,7 @@ import { IndexedPerson } from "../types/IndexedPerson";
 export function KimrofUserEditor() {
     return (
 
-        <Kimrof values={initialPerson as IndexedPerson}>
+        <Kimrof initialValues={initialPerson as IndexedPerson}>
             <div>
                 <h4>Kimrof User Editor</h4>
                 <p>Perosn name: {initialPerson.firstname}</p>

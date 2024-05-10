@@ -2,11 +2,11 @@ import {useContext, useCallback, ChangeEvent} from 'react'
 import {KimrofContext} from './KimrofContext'
 
 export function useKimrofField(name: string) {
-    const {values} = useContext(KimrofContext)
+    const {values,setFieldValue} = useContext(KimrofContext)
 
     const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        console.log(e)
-    }, [])
+        setFieldValue(e.target.name, e.target.value)
+    }, [setFieldValue])
 
     return {
         value: values[name],

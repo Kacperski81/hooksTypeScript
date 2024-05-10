@@ -6,7 +6,7 @@ export function KimrofLabeledField({name, label}: {name: string, label: string})
     
     return (
         <div>
-            <LabeledInput label={label} value={value} onChange={onChange}/>
+            <LabeledInput name={name} label={label} value={value} onChange={onChange}/>
         </div>
     )
 }

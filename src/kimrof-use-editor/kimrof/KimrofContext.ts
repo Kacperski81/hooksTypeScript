@@ -1,12 +1,14 @@
 import { createContext } from 'react'
-import { KimrofObject } from './Types'
+import { KimrofObject, KimrofProperty } from './Types'
 
-interface kimrofContext {
+export interface kimrofContext {
     values: KimrofObject
+    setFieldValue: (name: string, value: KimrofProperty) => void
 }
 
 export const KimrofContext = createContext<kimrofContext>({
-    values: {}
+    values: {},
+    setFieldValue: () => void null,
 })
 
 
