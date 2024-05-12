@@ -6,7 +6,7 @@ import { IndexedPerson } from "../types/IndexedPerson";
 export function KimrofUserEditor() {
     return (
 
-        <Kimrof initialValues={initialPerson as IndexedPerson}>
+        <Kimrof initialValues={initialPerson as IndexedPerson} onSubmit={(person) => alert(JSON.stringify(person,null,2))}>
             <div>
                 <h4>Kimrof User Editor</h4>
                 <p>Perosn name: {initialPerson.firstname}</p>
