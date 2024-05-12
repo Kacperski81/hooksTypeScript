@@ -3,7 +3,7 @@ import { KimrofLabeledField, useKimrof, useKimrofForm } from "./kimrof"
 
 export function UserEditor() {
     const formProps = useKimrofForm();
-    const { values, metadata : { isDirty } } = useKimrof()
+    const { values, metadata : { isDirty, isValid } } = useKimrof()
 
     return (
         <form {...formProps}>
@@ -13,7 +13,7 @@ export function UserEditor() {
             <KimrofLabeledField name="email" label="Email" />
             <KimrofLabeledField name="address" label="Address" />
             <KimrofLabeledField name="phone" label="Phone" />
-            <button className={clsx("bg-blue-500",{ "bg-red-500":!isDirty})} disabled={!isDirty}>
+            <button className={clsx("bg-blue-500",{ "bg-red-500":!isDirty})} disabled={!isDirty || !isValid}>
                 Save
             </button>
             <hr />
