@@ -53,7 +53,7 @@ export function AppNavbar() {
                     </li>
 
                     <li className="mr-2">
-                        <NavLink to="/formik">Formik</NavLink>
+                        <NavLink to="/about">About</NavLink>
                     </li>
 
                 </ul>
